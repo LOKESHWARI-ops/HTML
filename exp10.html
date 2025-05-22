@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debug Example</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 100px;
+      background-color: coral;
+      margin: 20px auto;
+      text-align: center;
+      line-height: 100px;
+      font-weight: bold;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Debugging with DevTools</h2>
+  <div class="box" id="myBox">Click Me</div>
+
+  <script>
+    // Log to console
+    console.log("Script loaded!");
+
+    const box = document.getElementById("myBox");
+
+    // Example function with variables for debugging
+    function changeBox() {
+      let color = "lightblue";
+      let text = "Updated!";
+      
+      // Intentional bug for debugging: misspelled variable 'colr'
+      box.style.backgroundColor = colr;  // Mistake here
+      box.textContent = text;
+    }
+
+    // Event listener
+    box.addEventListener("click", changeBox);
+  </script>
+
+</body>
+</html>

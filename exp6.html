@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Feedback</title>
+    <style>
+        form {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            font-family: sans-serif;
+        }
+        .enlarged {
+            width: 400px;
+        }
+        #eventImage {
+            width: 200px;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+        #feeDisplay {
+            font-weight: bold;
+            color: darkgreen;
+        }
+        #charCount {
+            float: right;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <form onsubmit="event.preventDefault(); alert('Feedback submitted!')">
+        <h2>Event Feedback</h2>
+
+        <!-- Phone Number -->
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" onblur="validatePhone()" placeholder="Enter 10-digit phone" required>
+        <div id="phoneError" style="color: red;"></div>
+
+        <!-- Dropdown -->
+        <label for="eventSelect">Choose Event:</label>
+        <select id="eventSelect" onchange="displayFee()">
+            <option value="">--Select--</option>
+            <option value="100">Yoga Session</option>
+            <option value="150">Food Fair</option>
+            <option value="200">Cultural Night</option>
+        </select>
+        <div>Event Fee: <span id="feeDisplay">--</span> INR</div>
+
+        <!-- Image with dblclick -->
+        <p>Double-click to enlarge image:</p>
+        <img src="event.jpg" alt="Event" id="eventImage" ondblclick="toggleImageSize()">
+
+        <!-- Feedback with key events -->
+        <label for="feedback">Your Feedback:</label>
+        <textarea id="feedback" rows="4" placeholder="Write here..." onkeyup="countCharacters()"></textarea>
+        <div id="charCount">0 characters</div>
+
+        <!-- Submit -->
+        <br><br>
+        <button type="submit" onclick="showConfirmation()">Submit</button>
+    </form>
+
+    <script>
+        function validatePhone() {
+            const phone = document.getElementById("phone").value;
+            const errorDiv = document.getElementById("phoneError");
+            const isValid = /^\d{10}$/.test(phone);
+            errorDiv.textContent = isValid ? "" : "Invalid phone number. Enter 10 digits.";
+        }
+
+        function displayFee() {
+            const fee = document.getElementById("eventSelect").value;
+            document.getElementById("feeDisplay").textContent = fee || "--";
+        }
+
+        function toggleImageSize() {
+            const img = document.getElementById("eventImage");
+            img.classList.toggle("enlarged");
+        }
+
+        function countCharacters() {
+            const feedback = document.getElementById("feedback").value;
+            document.getElementById("charCount").textContent = ${feedback.length} characters;
+        }
+
+        function showConfirmation() {
+            alert("Thank you! Your feedback is being processed.");
+        }
+    </script>
+
+</body>
+</html>
